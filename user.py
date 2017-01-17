@@ -1,6 +1,5 @@
 import time
 
-
 class User:
     '''Class containing basic data pertaining to all users of the system.'''
 
@@ -39,19 +38,6 @@ class User:
 
         return cls.ALL_USERS
 
-
-
-
-Adam = User('Adam', 'Mickiewicz', 100, 'Male', 192345567, 'Adam','Mickiewicz')
-
-print(Adam.date_added)
-print(User.ALL_USERS)
-
-print(User.get_all())
-
-print(Adam.validate_password('abc'))
-
-print(Adam.validate_password('Mickiewicz'))
 
 
 
