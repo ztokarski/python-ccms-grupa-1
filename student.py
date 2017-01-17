@@ -10,7 +10,7 @@ class Student(User):
     def __init__(self,name, surname, age, gender, pesel, login, password, date_removed=None, status= 'Active'):
         User.__init__(self,name, surname, age, gender, pesel, login, password, date_removed, status)
         self.class_attendance = Attendance.create_attendance()
-        self.list_of_attendance = self.class_attendance.attendance_list
+        self.list_of_attendance = self.class_attendance
         self.submissions = []
         self.grades = []
         self.ALL_STUDENTS.append(self)
@@ -28,7 +28,15 @@ class Student(User):
         return 'Student: {} {}, age: {}, gender: {}, PESEL: {}, Status: {}, Grades: {}'.format(self.name, self.surname, self.age, self.gender, self.pesel, self.status, self.grades)
 
     def to_list(self):
-        return [self.name, self.surname, str(self.age), self.gender, self.pesel, self.login, self._password, self.date_removed, self.status, self.grades, self.list_of_attendance, self.date_added]
+
+        attendance_dates_status = ''
+
+        for attendance in self.list_of_attendance.attendance_list:
+            print(attendance.date)
+            print(attendance.status)
+            attendance_dates_status += attendance.date + ':' + str(attendance.status) + '|'
+
+        return [self.name, self.surname, str(self.age), self.gender, self.pesel, self.login, self._password, str(self.date_removed), self.status, self.date_added, attendance_dates_status]
 
 
     @classmethod
@@ -40,12 +48,29 @@ class Student(User):
 
                 line_splitted = line.strip('\n').split(',')
 
-                Student(line_splitted[0],line_splitted[1],int(line_splitted[2]), line_splitted[3],line_splitted[4],line_splitted[5],line_splitted[6],line_splitted[7],line_splitted[8])
+                try:
+
+                    attendance_dates_status = line_splitted[10].split('|')
+
+                    separated_dates_status = []
+                    for item in attendance_dates_status:
+                        separated_dates_status.append(item.split(':'))
+
+                    one_from_students = Student(line_splitted[0],line_splitted[1],int(line_splitted[2]), line_splitted[3],line_splitted[4],line_splitted[5],line_splitted[6],line_splitted[7],line_splitted[8])
+
+
+                    print(separated_dates_status)
+                    for element in range(len(separated_dates_status)):
+
+                        one_from_students.list_of_attendance.checking_presence(separated_dates_status[element][0], int(separated_dates_status[element][1]))
+
+                except IndexError:
+                    Student(line_splitted[0], line_splitted[1], int(line_splitted[2]), line_splitted[3], line_splitted[4], line_splitted[5], line_splitted[6], line_splitted[7], line_splitted[8])
 
             class_file.close()
 
     @classmethod
-    def write_changes_to_file(cls, filename="students.csv"):
+    def write_changes_to_file(cls, filename):
         with open(filename, "w") as class_file:
             for obj in cls.ALL_STUDENTS:
                 print(obj)
@@ -64,18 +89,18 @@ class Student(User):
 class Attendance():
     '''Attendance class containing data pertaining to all student attendance as well as each student attendance.'''
 
-    def __init__(self, status = None):
-        date_attendance = time.localtime()
-        self.date =  '{}/{}/{}'.format(date_attendance[0], date_attendance[1], date_attendance[2])
+    def __init__(self, date = ' ', status = 0):
+
+        self.date =  date
         self.status = status
         self.attendance_list = []
 
-    def checking_presence(self, status):
+    def checking_presence(self, date, status):
         '''Changing status of student presence at the day when attendance is checked.'''
 
-        self.attendance_list.append(Attendance(status))
+        self.attendance_list.append(Attendance(date, status))
 
-    def update_presence(self,status, date):
+    def update_presence(self,date, status):
         '''Changing status of student presence at selected day.'''
 
         for day_at_school in self.attendance_list:
@@ -98,18 +123,19 @@ class Attendance():
     @classmethod
     def create_attendance(cls):
 
-        return Attendance(0)
+        return Attendance()
 
 
 Student.loading_file('students.csv')
 
 for student in Student.get_all():
-    student.class_attendance.checking_presence(2)
+    student.list_of_attendance.checking_presence('2017/1/17',2)
+    student.list_of_attendance.checking_presence('2017/2/18',2)
+    student.list_of_attendance.checking_presence('2018/3/19', 1)
 
-for student in Student.get_all():
-    for attendance in student.list_of_attendance:
-        print(attendance)
+Dave = Student('Dave', 'Beckingham', 22, 'Male','12345678912', 'DaveBeckingham','abc123')
 
-Student.write_changes_to_file('students.csv')
+Dave.list_of_attendance.checking_presence('2017/1/17',2)
 
 
+Student.write_changes_to_file('students2.csv')
