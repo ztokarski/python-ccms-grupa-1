@@ -1,6 +1,11 @@
-import Person from person.py
+import user from user.py
+import attendace from attendace.py
+import submissions from submissions.py
 
-class Student(Person):
+class Student(User):
 
-def __init__(self)
-pass
+def __init__(self,name, surname, age, gender, pesel, login, password, date_addeed, date_remove, status, class_attendance, grades, submissions):
+    User.__init__(name, surname, age, gender, pesel, login, password, date_addeed, date_remove, status)
+    # self.class_attendance = class_attendance(self)
+    # self.grades = grades(self)
+    # self.submissions = submissions(self)
