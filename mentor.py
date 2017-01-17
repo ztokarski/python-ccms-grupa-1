@@ -6,8 +6,8 @@ import submissions from submissions.py
 class Mentor(Employee):
 
 
-def __init__(self,name, surname, age, gender, pesel, login, password, date_addeed, date_remove, status, class_attendance, grades, submissions):
-    Employee.__init__(name, surname, age, gender, pesel, login, password, date_addeed, date_remove, status)
+def __init__(self,name, surname, age, gender, pesel, login, password, date_removed, status):
+    Employee.__init__(name, surname, age, gender, pesel, login, password, date_removed, status)
 
 def create_mentor():
     pass
