@@ -8,14 +8,14 @@ class User:
     def __init__(self,name, surname, age, gender, pesel, login, password, date_removed=None, status = 'Active'):
         '''Initialize User object. '''
 
-        if not(pesel.isdigit()) or len(pesel) != 11:
-            raise ValueError('Pesel has to contain 11 numbers.')
+        #if not(pesel.isdigit()) or len(pesel) != 11:
+         #   raise ValueError('Pesel has to contain 11 numbers.')
 
-        if gender not in ('Male', 'Female'):
-            raise ValueError('Gender has to be either Male or Female')
+        #if gender not in ('Male', 'Female'):
+        #    raise ValueError('Gender has to be either Male or Female')
 
-        if type(age) != int:
-            raise ValueError('Age has to be integer.')
+        #if type(age) != int:
+        #   raise ValueError('Age has to be integer.')
 
         self.name = name
         self.surname = surname
@@ -42,6 +42,18 @@ class User:
         else:
             return False
 
+    @classmethod
+    def loading_file(self,filename):
+
+        with open(filename, 'r') as class_file:
+            count = 1
+            for line in class_file:
+                print(line)
+                User(line[0],line[1],line[2], line[3],line[4],line[5],line[6],line[7],line[8])
+
+
+
+
 
     @classmethod
     def get_all(cls):
@@ -49,3 +61,11 @@ class User:
 
         return cls.ALL_USERS
 
+
+
+
+
+User.loading_file('employees.csv')
+
+
+print(User.get_all())
