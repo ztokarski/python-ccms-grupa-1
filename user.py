@@ -5,7 +5,7 @@ class User:
 
     ALL_USERS = []  #to store all instances of User class
 
-    def __init__(self,name, surname, age, gender, pesel, login, password, date_removed=None, status = 'Active'):
+    def __init__(self, name, surname, age, gender, pesel, login, password, date_removed=None, status = 'Active'):
         '''Initialize User object. '''
 
         #if not(pesel.isdigit()) or len(pesel) != 11:
@@ -59,4 +59,15 @@ class User:
 
         return cls.ALL_USERS
 
+<<<<<<< HEAD
 
+=======
+#
+#
+#
+#
+# User.loading_file('employees.csv')
+#
+#
+# print(User.get_all())
+>>>>>>> 4a5c9d3454faef3630382d1f5c941af7e9e9de85
