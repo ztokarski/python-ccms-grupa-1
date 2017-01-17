@@ -27,7 +27,3 @@ Adam = User('Adam', 'Mickiewicz', 100, 'Male', 192345567, 'Adam','Mickiewicz','0
 print(User.ALL_USERS)
 
 print(User.get_all())
-
-
-
-
