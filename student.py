@@ -28,7 +28,7 @@ class Student(User):
         return 'Student: {} {}, age: {}, gender: {}, PESEL: {}, Status: {}, Grades: {}'.format(self.name, self.surname, self.age, self.gender, self.pesel, self.status, self.grades)
 
     def to_list(self):
-        return [self.name, self.surname, self.age, self.gender, self.pesel, self.login, self._password, self.date_removed, self.status, self.grades, self.list_of_attendance, self.date_added]
+        return [self.name, self.surname, str(self.age), self.gender, self.pesel, self.login, self._password, self.date_removed, self.status, self.grades, self.list_of_attendance, self.date_added]
 
 
     @classmethod
