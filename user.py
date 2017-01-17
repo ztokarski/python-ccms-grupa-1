@@ -39,5 +39,3 @@ class User:
         return cls.ALL_USERS
 
 
-
-
