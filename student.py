@@ -15,7 +15,6 @@ class Student(User):
         self.grades = []
         self.ALL_STUDENTS.append(self)
 
-
     def create_submission(self, link, description):
 
         self.submissions.append(Submission(link,description))
@@ -27,6 +26,9 @@ class Student(User):
     def __str__(self):
 
         return 'Student: {} {}, age: {}, gender: {}, PESEL: {}, Status: {}, Grades: {}'.format(self.name, self.surname, self.age, self.gender, self.pesel, self.status, self.grades)
+
+    def to_list(self):
+        return [self.name, self.surname, self.age, self.gender, self.pesel, self.login, self._password, self.date_removed, self.status, self.grades, self.list_of_attendance, self.date_added]
 
 
     @classmethod
@@ -43,9 +45,14 @@ class Student(User):
             class_file.close()
 
     @classmethod
-    def save_into_file(cl):
-        pass
-
+    def write_changes_to_file(cls, filename="students.csv"):
+        with open(filename, "w") as class_file:
+            for obj in cls.ALL_STUDENTS:
+                print(obj)
+                row = ",".join(obj.to_list())
+                print(row)
+                class_file.write(row + "\n")
+            class_file.close()
 
     @classmethod
     def get_all(cls):
@@ -57,9 +64,7 @@ class Student(User):
 class Attendance():
     '''Attendance class containing data pertaining to all student attendance as well as each student attendance.'''
 
-
     def __init__(self, status = None):
-
         date_attendance = time.localtime()
         self.date =  '{}/{}/{}'.format(date_attendance[0], date_attendance[1], date_attendance[2])
         self.status = status
@@ -90,29 +95,21 @@ class Attendance():
 
         return 'Student was {} at the day {}.'.format(student_status, self.date)
 
-
     @classmethod
-
     def create_attendance(cls):
 
         return Attendance(0)
 
 
-
 Student.loading_file('students.csv')
 
-
-
 for student in Student.get_all():
-
-
     student.class_attendance.checking_presence(2)
-#    print(student.class_attendance.attendance_list)
- #   for attendance in student.class_attendance.attendance_list:
-  #      print(attendance.status)
-
 
 for student in Student.get_all():
     for attendance in student.list_of_attendance:
         print(attendance)
+
+Student.write_changes_to_file('students.csv')
+
 

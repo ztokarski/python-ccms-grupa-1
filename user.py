@@ -59,15 +59,4 @@ class User:
 
         return cls.ALL_USERS
 
-<<<<<<< HEAD
 
-=======
-#
-#
-#
-#
-# User.loading_file('employees.csv')
-#
-#
-# print(User.get_all())
->>>>>>> 4a5c9d3454faef3630382d1f5c941af7e9e9de85
