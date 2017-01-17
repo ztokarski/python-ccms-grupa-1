@@ -53,8 +53,6 @@ class User:
 
 
 
-
-
     @classmethod
     def get_all(cls):
         'Return all instances of User class.'
@@ -62,10 +60,3 @@ class User:
         return cls.ALL_USERS
 
 
-
-
-
-User.loading_file('employees.csv')
-
-
-print(User.get_all())
