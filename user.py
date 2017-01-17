@@ -8,6 +8,15 @@ class User:
     def __init__(self,name, surname, age, gender, pesel, login, password, date_removed=None, status = 'Active'):
         '''Initialize User object. '''
 
+        if not(pesel.isdigit()) or len(pesel) != 11:
+            raise ValueError('Pesel has to contain 11 numbers.')
+
+        if gender not in ('Male', 'Female'):
+            raise ValueError('Gender has to be either Male or Female')
+
+        if type(age) != int:
+            raise ValueError('Age has to be integer.')
+
         self.name = name
         self.surname = surname
         self.age = age
@@ -20,6 +29,8 @@ class User:
         self.date_removed = date_removed
         self.status = status
         self.ALL_USERS.append(self)
+
+
 
 
     def validate_password(self, given_password):
@@ -37,5 +48,4 @@ class User:
         'Return all instances of User class.'
 
         return cls.ALL_USERS
-
 
