@@ -24,12 +24,15 @@ class User:
         self.pesel = pesel
         self.login = login
         self._password = password
-        self.date_when_added = date_when_added
-        self.date_added = '{}/{}/{}'.format(self.date_when_added[0], self.date_when_added[1], self.date_when_added[2])
         self.date_removed = date_removed
         self.status = status
         self.ALL_USERS.append(self)
+        self.date_when_added = date_when_added
+        if type(self.date_when_added) == str:
+            self.date_added = self.date_when_added
 
+        else:
+            self.date_added = '{}/{}/{}'.format(self.date_when_added[0], self.date_when_added[1], self.date_when_added[2])
 
 
     def validate_password(self, given_password):
