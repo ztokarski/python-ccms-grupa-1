@@ -38,16 +38,6 @@ class User:
         else:
             return False
 
-    @classmethod
-    def loading_file(self,filename):
-
-        with open(filename, 'r') as class_file:
-            count = 1
-            for line in class_file:
-                print(line)
-                User(line[0],line[1],line[2], line[3],line[4],line[5],line[6],line[7],line[8])
-
-
 
     @classmethod
     def get_all(cls):
