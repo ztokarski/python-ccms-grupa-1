@@ -207,8 +207,19 @@ class Attendance():
         return 'Student was {} at the day {}.'.format(student_status, self.date)
 
 
-Student.loading_file('students2.csv')
 
+#Student.loading_file('students2.csv')
+
+
+
+
+
+#Mike = Student('Mike', 'Beckingham', 22, 'Male','12345678912', 'DaveBeckingham','abc123')
+
+#Mike.list_of_attendance.checking_presence('2088/1/20',1)
+
+
+#Mike.submit_submission('www.asbc.com','Done','To_do_list')
 
 
 #Adam = Student('Adam','Mak',22, 'Male', '12345678901','AdamM','Capac', None, 'Active','', '7/1/2016')
@@ -227,9 +238,9 @@ Student.loading_file('students2.csv')
 # # # print(Adam.grades)
 # #
 
-print(len(Student.get_all()))
-for student in Student.get_all():
-      print(student)
+# print(len(Student.get_all()))
+# for student in Student.get_all():
+#       print(student)
 
 # print(To_do_list.ASSIGNMENT_SUBMISSION)
-Student.write_changes_to_file('students2.csv')
+# Student.write_changes_to_file('students2.csv')

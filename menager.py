@@ -15,11 +15,11 @@ class Menager(Employee):
     def add_mentor(self,name, surname, age, gender, pesel, login, password, date_remove, status, date_when_added):
         Mentor.MENTOR_LIST.append(Mentor(name, surname, age, gender, pesel, login, password, date_remove, status, date_when_added))
 
-    def remove_mentor():
-        pass
+    def remove_mentor(self,mentor_obj):  ## wchodzimy objektem w którym chcemy to zmienic
+        mentor_obj.status = "disable"
 
-    def viev_mentors():
-        pass
+    def viev_mentors():  ## zwraca nam po prostu liste obiektów clasy mentor
+        Mentor.get_all()
 
     def to_list(self):
         return [self.name, self.surname, self.age, self.gender, self.pesel, self.login, self._password, self.date_removed, self.status, self.date_when_added]
