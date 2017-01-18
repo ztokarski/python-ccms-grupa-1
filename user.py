@@ -6,7 +6,7 @@ class User:
     ALL_USERS = []  #to store all instances of User class
 
     def __init__(self, name, surname, age, gender, pesel, login, password, date_removed=None, status = 'Active',date_when_added =''):
-        '''Initialize User object. '''
+        '''Method that initializes User object. '''
 
         #if not(pesel.isdigit()) or len(pesel) != 11:
          #   raise ValueError('Pesel has to contain 11 numbers.')
@@ -30,7 +30,7 @@ class User:
         self.date_when_added = date_when_added
 
     def validate_password(self, given_password):
-        '''To validate password and provide access to the user account.'''
+        '''Method that validates password and provide access to the user account.'''
 
         if given_password == self._password:
             return True
@@ -51,8 +51,7 @@ class User:
 
     @classmethod
     def get_all(cls):
-        'Return all instances of User class.'
-
+        'Class method that returns all instances of User class.'
         return cls.ALL_USERS
 
 
