@@ -1,6 +1,6 @@
 """Submission"""
 """ATR link, disc, grades"""
-
+from assigment import Assignment
 
 
 class Submission():
@@ -21,12 +21,14 @@ class Submission():
     def add_submission_to_submissions_list(self):
         '''Method that creates submission object and appends it to list of all submission object by the given
         instance of student class.'''
+        new_submission = Submission(self.link,self.description,self.assignment,self.grades)
+        self.submissions_list.append(new_submission)
+        self.assignment.ASSIGNMENT_SUBMISSION[self.assignment] = new_submission
 
-        self.submissions_list.append(Submission(self.link,self.description,self.assignment,self.grades))
 
     def __str__(self):
         '''Method that overwrittes default __str__ method and returns string with basic data taken from instance
         of submission class.'''
 
-        return 'Submission to {} assignment. Link: {}, Description: {}, Grades given: {}'.format(self.assignment,self.link, self.description, self.grades)
+        return 'Submission to {} assignment. Link: {}, Description: {}, Grades given: {}'.format(self.assignment.name_assignment,self.link, self.description, self.grades)
 
