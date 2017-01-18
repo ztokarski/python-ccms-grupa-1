@@ -1,5 +1,6 @@
-class Assigment:
-    pass
+class Assignment:
+    '''Assignment class containing data pertaining to assignment created by Mentor.'''
 
-class Grade(Assigment):
-    pass
+    def __init__(self, ):
+        pass
+
