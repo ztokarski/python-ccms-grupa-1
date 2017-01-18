@@ -1,5 +1,6 @@
 from employee import Employee
 from student import Student
+from submission import Submission
 
 class Mentor(Employee):
 
@@ -9,14 +10,17 @@ class Mentor(Employee):
         Employee.__init__(self, name, surname, age, gender, pesel, login, password, date_removed, status, date_when_added)
 
     def add_student(self, name, surname, age, gender, pesel, login, password, date_removed, status, date_when_added):
-        Student().ALL_STUDENTS.append(Student(name, surname, age, gender, pesel, login, password, date_removed, status, date_when_added))
+        Student.ALL_STUDENTS.append(Student(name, surname, age, gender, pesel, login, password, date_removed, status, date_when_added))
 
     def make_assigment():
         pass
 
-    def grade_subbmission():
-        pass
-
+    def grade_subbmission(self, student_obj, grade): ## jako arg podajemy obiekt klasy student i ta funkcja zmienia temu obiektowi ocene w ostatnim nieocenionym submission
+        if  not student_obj.submissions.submission_list[-1].grades:
+             student_obj.submissions.submission_list[-1].grades.append(grade)  ##grade to lista z ocenami np [2,3,5]
+        else:
+            raise LookupError "Already graded"
+        
     def check_attendance():
         pass
 
