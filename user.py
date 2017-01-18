@@ -5,7 +5,7 @@ class User:
 
     ALL_USERS = []  #to store all instances of User class
 
-    def __init__(self, name, surname, age, gender, pesel, login, password, date_removed=None, status = 'Active'):
+    def __init__(self, name, surname, age, gender, pesel, login, password, date_removed=None, status = 'Active',date_when_added = time.localtime()):
         '''Initialize User object. '''
 
         #if not(pesel.isdigit()) or len(pesel) != 11:
@@ -24,12 +24,11 @@ class User:
         self.pesel = pesel
         self.login = login
         self._password = password
-        date_when_added = time.localtime()
-        self.date_added = '{}/{}/{}'.format(date_when_added[0], date_when_added[1], date_when_added[2])
+        self.date_when_added = date_when_added
+        self.date_added = '{}/{}/{}'.format(self.date_when_added[0], self.date_when_added[1], self.date_when_added[2])
         self.date_removed = date_removed
         self.status = status
         self.ALL_USERS.append(self)
-
 
 
 
