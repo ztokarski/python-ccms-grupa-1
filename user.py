@@ -5,7 +5,7 @@ class User:
 
     ALL_USERS = []  #to store all instances of User class
 
-    def __init__(self, name, surname, age, gender, pesel, login, password, date_removed=None, status = 'Active',date_when_added = time.localtime()):
+    def __init__(self, name, surname, age, gender, pesel, login, password, date_removed=None, status = 'Active',date_when_added =''):
         '''Initialize User object. '''
 
         #if not(pesel.isdigit()) or len(pesel) != 11:
@@ -28,12 +28,6 @@ class User:
         self.status = status
         self.ALL_USERS.append(self)
         self.date_when_added = date_when_added
-        if type(self.date_when_added) == str:
-            self.date_added = self.date_when_added
-
-        else:
-            self.date_added = '{}/{}/{}'.format(self.date_when_added[0], self.date_when_added[1], self.date_when_added[2])
-
 
     def validate_password(self, given_password):
         '''To validate password and provide access to the user account.'''
@@ -51,7 +45,7 @@ class User:
             count = 1
             for line in class_file:
                 print(line)
-                User(line[0],line[1],line[2], line[3],line[4],line[5],line[6],line[7],line[8])
+                User(line[0],line[1],line[2], line[3],line[4],line[5],line[6],line[7],lined[8])
 
 
 
@@ -60,5 +54,6 @@ class User:
         'Return all instances of User class.'
 
         return cls.ALL_USERS
+
 
 
