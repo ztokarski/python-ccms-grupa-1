@@ -96,12 +96,27 @@ def mentor_menu(mentor_object):
 
             mentor_object.add_student(name, surname, age, gender, pesel, login, password, date_remove, status,
                                    date_when_added)
-
+            """w każdym z tych działań trzeba dorobić zapusywanie do pliku"""
         elif user_input == "3":
-            pass
+            user_input2 = input("Give me Surname: ")
+            for object in Student.get_all():
+                if user_input2 == object.surname:
+                    mentor_object.remove_mentor(object)
+                    object.data_remove = actual_date
         elif user_input == "4":
-            pass
+
+            """poprawić aby wyświetlało po kolei nazwiska z listy i dalo sie to ogarnac """
+            user_input2 = input("Give me Surname: ")
+            attendance_status = input("1. Absent\n"
+                                     "2. Late\n"
+                                     "3. Present")
+
+            for object in Student.get_all():
+                if user_input2 == object.surname:
+                    mentor_object.check_attendance(object, actual_date, attendance_status)
         elif user_input == "5":
+
+            """o to to zrobie jutro rano"""
             pass
         elif user_input == "6":
             sys.exit()

@@ -11,7 +11,7 @@ class Mentor(Employee):
         Employee.__init__(self, name, surname, age, gender, pesel, login, password, date_removed, status, date_when_added)
 
     def add_student(self, name, surname, age, gender, pesel, login, password, date_removed, status, date_when_added):
-        Student.ALL_STUDENTS.append(Student(name, surname, age, gender, pesel, login, password, date_removed, status, date_when_added))
+        Student(name, surname, age, gender, pesel, login, password, date_removed, status, date_when_added)
 
     def make_assigment(self, name_assignment, deadline, date_added,task):
         Assignment(name_assignment, deadline, date_added,task)
