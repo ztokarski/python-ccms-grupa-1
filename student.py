@@ -167,7 +167,32 @@ class Student(User):
 
 
 # Student.loading_file()
+# # persons.age, persons.gender, persons.pesel, persons.login, persons.status, persons.date_when_adde
 #
+# for student in Student.get_all():
+#     print(type(student.name))
+#     print(type(student.surname))
+#     print(type(student.age))
+#     print(type(student.pesel))
+#     print(type(student.login))
+#     print(type(student.status))
+#     print(type(student.date_when_added))
+#
+# Student.write_changes_to_file('students2.csv')
+#
+#
+#
+# Student.loading_file('students2.csv')
+#
+# for student in Student.get_all():
+#     print(type(student.name))
+#     print(type(student.surname))
+#     print(type(student.age))
+#     print(type(student.pesel))
+#     print(type(student.login))
+#     print(type(student.status))
+#     print(type(student.date_when_added))
+
 # a = None
 # for student in Student.get_all():
 #     if student.surname == 'Milecka':
