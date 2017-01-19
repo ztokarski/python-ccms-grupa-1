@@ -1,8 +1,9 @@
 import time
 
 from user import User
-# from assigment import Assignment
-from submission import Submission, Assignment
+from assigment import Assignment
+from submission import Submission
+from attendance import Attendance
 
 
 class Student(User):
@@ -17,29 +18,30 @@ class Student(User):
 
         User.__init__(self,name, surname, age, gender, pesel, login, password, date_removed, status, date_when_added)
 
-        self.list_of_attendance = Attendance()
+        self.attendances = Attendance()
         self.submissions = submissions
         self.ALL_STUDENTS.append(self)
         self.grades = []
-
-        if self.submissions:
-            for submission in self.submissions.submissions_list:
-                self.grades.extend(submission.grades)
 
     def submit_submission(self, link, description, assignment, grades):
         '''Method that creates instance of Submission class and adds this instance to list of all instance of
         Submission class created by the given instance of Student class.'''
 
         self.submissions = Submission(link,description, assignment,grades)
-
-        self.grades.extend(self.submissions.grades)
-
         self.submissions.add_submission_to_submissions_list()
 
+    def get_grades(self):
+        if self.submissions:
+            for submission in self.submissions.submissions_list:
+                self.grades.extend(submission.grades)
 
+    def give_instance_values(self):
+        return (self.name, self.surname, self.age, self.gender, self.pesel, self.login, self.password, self.date_removed, self.status, self.date_when_added)
 
     def __str__(self):
         '''Method that overwrittes default __str__ method and returns string with basic student data.'''
+
+        self.get_grades()
 
         string_grades = ''
 
@@ -57,7 +59,7 @@ class Student(User):
 
         attendance_dates_status = ''
 
-        for attendance in self.list_of_attendance.attendance_list:
+        for attendance in self.attendances.attendance_list:
             attendance_dates_status += attendance.date + ':' + str(attendance.status) + '|'
 
         string_submissions = ''
@@ -139,7 +141,7 @@ class Student(User):
 
                     for element in range(len(separated_dates_status)):
 
-                        one_from_students.list_of_attendance.checking_presence(separated_dates_status[element][0], int(separated_dates_status[element][1]))  # creating instances of Attendance class
+                        one_from_students.attendances.checking_presence(separated_dates_status[element][0], int(separated_dates_status[element][1]))  # creating instances of Attendance class
 
                 except IndexError:
                     pass   # if there are no attendance data then instance of student object is created without instances of attendance class
@@ -165,47 +167,6 @@ class Student(User):
         return cls.ALL_STUDENTS
 
 
-class Attendance():
-    '''Attendance class containing data pertaining to all student attendance as well as each student attendance.'''
-
-    def __init__(self, date = ' ', status = 0):
-        '''Method that initialize instance of Attendance class.'''
-
-        self.date =  date
-        self.status = status
-        self.attendance_list = []
-
-    def checking_presence(self, date, status):
-        '''Changing status of student presence at the day when attendance is checked.'''
-
-        self.attendance_list.append(Attendance(date, status))
-
-    def update_presence(self,date, status):
-        '''Changing status of student presence at selected day.'''
-
-        for day_at_school in self.attendance_list:
-            if day_at_school.date == date:
-                day_at_school.status = status
-                return
-
-        raise ValueError('There is no such date.')
-
-    def __str__(self):
-        '''Method that overwrittes default __str__ method and changes student status from int into string and
-        returns string with basic data from instance of attendance class.'''
-
-        if self.status == 2:
-            student_status = 'present'
-
-        elif self.status == 1:
-            student_status = 'late'
-
-        elif self.status == 0:
-            student_status = 'absent'
-
-        return 'Student was {} at the day {}.'.format(student_status, self.date)
-
-
 
 Student.loading_file('students.csv')
 
@@ -215,7 +176,7 @@ Student.loading_file('students.csv')
 
 Mike = Student('Mike', 'Beckingham', 22, 'Male','12345678912', 'DaveBeckingham','abc123')
 
-Mike.list_of_attendance.checking_presence('2088/1/20',1)
+Mike.attendances.checking_presence('2088/1/20',1)
 Inventory = Assignment('Inventory','2017/2/10','2016/10/12', 'create inventory')
 To_do_list = Assignment('To_do_list','2017/1/20', '2017/1/1','create to do list')
 Mike.submit_submission('www.asbc.com','Done',To_do_list,[2,3])
@@ -227,8 +188,8 @@ print(Assignment.get_all())
 #Adam = Student('Adam','Mak',22, 'Male', '12345678901','AdamM','Capac', None, 'Active','', '7/1/2016')
 #
 
-# for student in Student.get_all():
-#     student.list_of_attendance.checking_presence('2017/1/18',2)
+for student in Student.get_all():
+    student.attendances.checking_presence('2017/1/18',2)
 
 # #
 # #
@@ -241,11 +202,12 @@ print(Assignment.get_all())
 # #
 
 # print(len(Student.get_all()))
-# for student in Student.get_all():
-#       print(student)
+for student in Student.get_all():
+       print(student)
+       print(student.attendances.attendance_list[0])
 
 # print(To_do_list.ASSIGNMENT_SUBMISSION)
-#Student.write_changes_to_file('students2.csv')
+Student.write_changes_to_file('students2.csv')
 
 Assignment.write_changes_to_file('Assignment.csv')
 

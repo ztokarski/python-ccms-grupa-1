@@ -8,7 +8,7 @@ class Submission():
     assignment to which submission each is made, grades given for eachsubmission and list of all submissions
     made by the student).  '''
 
-    def __init__(self,link,description, assignment,grades=[3,2]):
+    def __init__(self,link,description, assignment,grades):
         '''Method that initialize instance of Submission class.'''
 
         self.link = link
