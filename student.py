@@ -1,8 +1,8 @@
 import time
 
 from user import User
-from assigment import Assignment
-from submission import Submission
+# from assigment import Assignment
+from submission import Submission, Assignment
 
 
 class Student(User):
@@ -10,7 +10,7 @@ class Student(User):
     (grades given for each submission, other information pertaining to submission) and Student attendance).
     '''
 
-    ALL_STUDENTS = []  #list containing all instances of Student class
+    ALL_STUDENTS = []  # list containing all instances of Student class
 
     def __init__(self,name, surname, age, gender, pesel, login, password, date_removed=None, status= 'Active', submissions= [],date_when_added = ''):
         '''Method that initialize instance of Student class.'''
@@ -114,7 +114,6 @@ class Student(User):
             for line in class_file:
 
                 line_splitted = line.strip('\n').split(',')
-                print(line_splitted)
 
                 one_from_students = Student(line_splitted[0], line_splitted[1], int(line_splitted[2]),
                                             line_splitted[3],
@@ -208,26 +207,29 @@ class Attendance():
 
 
 
-#Student.loading_file('students2.csv')
+Student.loading_file('students.csv')
 
 
 
 
 
-#Mike = Student('Mike', 'Beckingham', 22, 'Male','12345678912', 'DaveBeckingham','abc123')
+Mike = Student('Mike', 'Beckingham', 22, 'Male','12345678912', 'DaveBeckingham','abc123')
 
-#Mike.list_of_attendance.checking_presence('2088/1/20',1)
+Mike.list_of_attendance.checking_presence('2088/1/20',1)
+Inventory = Assignment('Inventory','2017/2/10','2016/10/12', 'create inventory')
+To_do_list = Assignment('To_do_list','2017/1/20', '2017/1/1','create to do list')
+Mike.submit_submission('www.asbc.com','Done',To_do_list,[2,3])
 
 
-#Mike.submit_submission('www.asbc.com','Done','To_do_list')
 
+print(Assignment.get_all())
 
 #Adam = Student('Adam','Mak',22, 'Male', '12345678901','AdamM','Capac', None, 'Active','', '7/1/2016')
 #
 
 # for student in Student.get_all():
 #     student.list_of_attendance.checking_presence('2017/1/18',2)
-# To_do_list = Assignment('To_do_list','2017/1/20', '2017/1/1','create to do list')
+
 # #
 # #
 # Adam.submit_submission('www.adc.com','Assignment done', To_do_list, [5,3])
@@ -243,4 +245,17 @@ class Attendance():
 #       print(student)
 
 # print(To_do_list.ASSIGNMENT_SUBMISSION)
-# Student.write_changes_to_file('students2.csv')
+#Student.write_changes_to_file('students2.csv')
+
+Assignment.write_changes_to_file('Assignment.csv')
+
+Assignment.loading_file('Assignment.csv')
+
+
+print(Assignment.get_all())
+
+for assignment in Assignment.get_all():
+    print(assignment)
+
+
+Assignment.write_changes_to_file('Assignment2.csv')
