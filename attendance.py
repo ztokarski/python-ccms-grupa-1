@@ -37,4 +37,7 @@ class Attendance():
         elif self.status == '0':
             student_status = 'absent'
 
+        else:
+            student_status = '....'
+
         return 'Student was {} at the day {}.'.format(student_status, self.date)
