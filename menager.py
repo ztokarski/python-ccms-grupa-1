@@ -18,8 +18,8 @@ class Menager(Employee):
     def remove_mentor(self,mentor_obj):  ## wchodzimy objektem w którym chcemy to zmienic
         mentor_obj.status = "disable"
 
-    def viev_mentors():  ## zwraca nam po prostu liste obiektów clasy mentor
-        Mentor.get_all()
+    def viev_mentors(self):  ## zwraca nam po prostu liste obiektów clasy mentor
+        return Mentor.get_all()
 
     def to_list(self):
         return [self.name, self.surname, self.age, self.gender, self.pesel, self.login, self._password, self.date_removed, self.status, self.date_when_added]
@@ -46,13 +46,13 @@ class Menager(Employee):
 
 
 
-Menager.loading_file()
-Mentor.loading_file()
-
-Menager.MENAGER_LIST[0].add_mentor("Andrzej", "duda", "24", "M", "12345", "AD", "policja", "None", "active", "2018")
-Mentor.write_changes_to_file()
-
-for item in Mentor.get_all():
-
-    print("cok")
-    print(item.__dict__)
+# Menager.loading_file()
+# Mentor.loading_file()
+#
+# Menager.MENAGER_LIST[0].add_mentor("Andrzej", "duda", "24", "M", "12345", "AD", "policja", "None", "active", "2018")
+# Mentor.write_changes_to_file()
+#
+# for item in Mentor.get_all():
+#
+#     print("cok")
+#     print(item.__dict__)

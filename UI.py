@@ -57,6 +57,6 @@ def print_table(table, title_list):
                     print("╩", end="")
             print("╝")
     table.remove(table[0])
-Employee.loading_file()
-head =["name","surname","age","gender","pesel","login","status", "date_added"]
-print_table(get_from_object_to_list(Employee.get_all()),head)
+# Employee.loading_file()
+# head =["name","surname","age","gender","pesel","login","status", "date_added"]
+# print_table(get_from_object_to_list(Employee.get_all()),head)
