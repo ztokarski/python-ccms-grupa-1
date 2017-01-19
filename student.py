@@ -1,4 +1,5 @@
 import time
+
 from user import User
 from assigment import Assignment
 from submission import Submission
@@ -97,7 +98,6 @@ class Student(User):
                     string_assignment_data += self.submissions[element].assignment.name_assignment + ':' + self.submissions[element].assignment.deadline + ':' + self.submissions[element].assignment.date_added + ':' + self.submissions[element].assignment.task + '|'
 
             submission_data = string_submissions + ',' + string_grades + ',' + string_assignment_data
-            print(submission_data)
 
         return [self.name, self.surname, str(self.age), self.gender, self.pesel, self.login, self._password, str(self.date_removed), self.status, str(self.date_when_added), str(attendance_dates_status), str(submission_data)]
 
@@ -183,7 +183,5 @@ class Student(User):
         'Return all instances of Student class.'
 
         return cls.ALL_STUDENTS
-
-
 
 
