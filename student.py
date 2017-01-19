@@ -201,23 +201,23 @@ for student in Student.get_all():
 # # # print(Adam.grades)
 # #
 
-# print(len(Student.get_all()))
-for student in Student.get_all():
-       print(student)
-       print(student.attendances.attendance_list[0])
-
-# print(To_do_list.ASSIGNMENT_SUBMISSION)
-Student.write_changes_to_file('students2.csv')
-
-Assignment.write_changes_to_file('Assignment.csv')
-
-Assignment.loading_file('Assignment.csv')
-
-
-print(Assignment.get_all())
-
-for assignment in Assignment.get_all():
-    print(assignment)
-
-
-Assignment.write_changes_to_file('Assignment2.csv')
+# # print(len(Student.get_all()))
+# for student in Student.get_all():
+#        print(student)
+#        print(student.attendances.attendance_list[0])
+#
+# # print(To_do_list.ASSIGNMENT_SUBMISSION)
+# Student.write_changes_to_file('students2.csv')
+#
+# Assignment.write_changes_to_file('Assignment.csv')
+#
+# Assignment.loading_file('Assignment.csv')
+#
+#
+# print(Assignment.get_all())
+#
+# for assignment in Assignment.get_all():
+#     print(assignment)
+#
+#
+# Assignment.write_changes_to_file('Assignment2.csv')

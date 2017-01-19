@@ -46,13 +46,13 @@ class Menager(Employee):
 
 
 
-Menager.loading_file()
-Mentor.loading_file()
-
-Menager.MENAGER_LIST[0].add_mentor("Andrzej", "duda", "24", "M", "12345", "AD", "policja", "None", "active", "2018")
-Mentor.write_changes_to_file()
-
-for item in Mentor.get_all():
-
-    print("cok")
-    print(item.__dict__)
+# Menager.loading_file()
+# Mentor.loading_file()
+#
+# Menager.MENAGER_LIST[0].add_mentor("Andrzej", "duda", "24", "M", "12345", "AD", "policja", "None", "active", "2018")
+# Mentor.write_changes_to_file()
+#
+# for item in Mentor.get_all():
+#
+#     print("cok")
+#     print(item.__dict__)
