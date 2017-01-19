@@ -89,8 +89,6 @@ class Student(User):
                 #         else:
                 #             string_submission_grades += self.ASSIGNMENT_SUBMISSION[self].grades[index]
 
-
-
             string_assignment_data = ''
 
             for element in range(len(self.submissions.submissions_list)):
@@ -168,37 +166,42 @@ class Student(User):
 
 
 
-Student.loading_file('students.csv')
-
-
-
-
-
-Mike = Student('Mike', 'Beckingham', 22, 'Male','12345678912', 'DaveBeckingham','abc123')
-
-Mike.attendances.checking_presence('2088/1/20',1)
-Inventory = Assignment('Inventory','2017/2/10','2016/10/12', 'create inventory')
-To_do_list = Assignment('To_do_list','2017/1/20', '2017/1/1','create to do list')
-Mike.submit_submission('www.asbc.com','Done',To_do_list,[2,3])
-
-
-
-print(Assignment.get_all())
-
-#Adam = Student('Adam','Mak',22, 'Male', '12345678901','AdamM','Capac', None, 'Active','', '7/1/2016')
+# Student.loading_file('students.csv')
 #
-
-for student in Student.get_all():
-    student.attendances.checking_presence('2017/1/18',2)
-
 # #
 # #
-# Adam.submit_submission('www.adc.com','Assignment done', To_do_list, [5,3])
 # #
 # #
+# Mike = Student('Mike', 'Beckingham', 22, 'Male','12345678912', 'DaveBeckingham','abc123')
+# #
+# # Mike.attendances.checking_presence('2088/1/20',1)
+# Inventory = Assignment('Inventory','2017/2/10','2016/10/12', 'create inventory')
+# To_do_list = Assignment('To_do_list','2017/1/20', '2017/1/1','create to do list')
+# Mike.submit_submission('www.asbc.com','Done',To_do_list,[2,3])
+#
+#
+# print(Assignment.get_all())
+#
+# #Adam = Student('Adam','Mak',22, 'Male', '12345678901','AdamM','Capac', None, 'Active','', '7/1/2016')
+# #
+#
+# # for student in Student.get_all():
+# #     student.attendances.checking_presence('2017/1/18',2)
+#
 # # #
 # # #
-# # # print(Adam.grades)
+# # Adam.submit_submission('www.adc.com','Assignment done', To_do_list, [5,3])
+# # #
+# # #
+# # # #
+# # # #
+# # # # print(Adam.grades)
+# # #
+#
+# # print(len(Student.get_all()))
+# # for student in Student.get_all():
+# #        print(student)
+# #        print(student.attendances.attendance_list[0])
 # #
 
 # # print(len(Student.get_all()))
@@ -221,3 +224,24 @@ for student in Student.get_all():
 #
 #
 # Assignment.write_changes_to_file('Assignment2.csv')
+
+# # # print(To_do_list.ASSIGNMENT_SUBMISSION)
+# # Student.write_changes_to_file('students2.csv')
+# # #
+# # Assignment.write_changes_to_file('Assignment.csv')
+# # #
+# # Assignment.loading_file('Assignment.csv')
+# # #
+# # #
+# # print(Assignment.get_all())
+# #
+# # for element in Assignment.get_all():
+# #     print(element)
+#
+# #
+# # for assignment in Assignment.get_all():
+# #     print(assignment)
+#
+#
+# #Assignment.write_changes_to_file('Assignment2.csv')
+>>>>>>> 0ea92449fb41b7d9bcbe16eba3dff8f1a6f2ff39

@@ -43,11 +43,13 @@ class Assignment:
 
         with open(filename, 'r') as class_file:
 
-            line = class_file.readline()
-            line_splitted = line.strip('\n').split(',')
-            print(line_splitted)
+            Assignment.ASSIGNMENTS = []
+            for line in class_file:
 
-            Assignment(line_splitted[0], line_splitted[1], line_splitted[2], line_splitted[3])
+                line_splitted = line.strip('\n').split(',')
+                print(line_splitted)
+
+                Assignment(line_splitted[0], line_splitted[1], line_splitted[2], line_splitted[3])
 
             class_file.close()
 
