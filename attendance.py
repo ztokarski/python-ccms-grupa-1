@@ -28,13 +28,13 @@ class Attendance():
         '''Method that overwrittes default __str__ method and changes student status from int into string and
         returns string with basic data from instance of attendance class.'''
 
-        if self.status == '2':
+        if self.status == '3':
             student_status = 'present'
 
-        elif self.status == '1':
+        elif self.status == '2':
             student_status = 'late'
 
-        elif self.status == '0':
+        elif self.status == '1':
             student_status = 'absent'
 
         else:

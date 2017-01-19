@@ -1,5 +1,4 @@
 import time
-
 from user import User
 from assigment import Assignment
 from submission import Submission
@@ -22,7 +21,7 @@ class Student(User):
 
         self.ALL_STUDENTS.append(self)
         self.grades = []
-        self.state = False
+
         self.submissions = []
 
 
@@ -187,140 +186,4 @@ class Student(User):
 
 
 
-#Student.loading_file('students2.csv')
-# # # # persons.age, persons.gender, persons.pesel, persons.login, persons.status, persons.date_when_adde
-# # #
-# # for student in Student.get_all():
-# #      print(type(student.name))
-# #      print(type(student.surname))
-# #      print(type(student.age))
-# #      print(type(student.pesel))
-# #      print(type(student.login))
-# #      print(type(student.status))
-# #      print(type(student.date_when_added))
-# #
-# # Student.write_changes_to_file('students2.csv')
-# #
-# #
-# # #
-# # Student.loading_file('students2.csv')
-# # #
-# # for student in Student.get_all():
-# #     print(type(student.name))
-# #     print(type(student.surname))
-# #     print(type(student.age))
-# #     print(type(student.pesel))
-# #     print(type(student.login))
-# #     print(type(student.status))
-# #     print(type(student.date_when_added))
-# #
-# # a = None
-# # for student in Student.get_all():
-# #      if student.surname == 'Milecka':
-# #          a = student
-# # #
-# # #
-# # print(a)
-# # #
-# # a.attendances.checking_presence('2017/1/10','1')
-# # a.attendances.update_presence('2017/1/10','2')
-# # for attendance in a.attendances.attendance_list:
-# #      print(a)
-# #      print(attendance)
-# # #
-# #
-# #
-# # #
-# # # #
-# # # #
-# # # #
-# # # #
-# Mike = Student('Mike', 'Beckingham', '22', 'Male','12345678912', 'DaveBeckingham','abc123')
-# # # # #
-# ## Mike.attendances.checking_presence('2088/1/20','1')
-# Inventory = Assignment('Inventory','2017/2/10','2016/10/12', 'create inventory')
-# To_do_list = Assignment('To_do_list','2017/1/20', '2017/1/1','create to do list')
-# Mike.submit_submission('www.asbc.com','Done',To_do_list,[])
-# # #for submission in Mike.submissions:
-# #  #   print(submission)
-# #
-# Mike.submit_submission('www.gd.com', 'hard',Inventory, [])
-# #
-# # # for submission in Mike.submissions:
-# # #     print(submission)
-# # #
-# # for student in Student.get_all():
-# #     print(student.submissions)
-# Student.write_changes_to_file('students2.csv')
-#
-#
-# #
-# # print(Assignment.get_all())
-# #
-# # #Adam = Student('Adam','Mak',22, 'Male', '12345678901','AdamM','Capac', None, 'Active','', '7/1/2016')
-# # #
-# #
-# for student in Student.get_all():
-#      student.attendances.checking_presence('2017/1/18','2')
-# #
-# # # #
-# # # #
-# # # Adam.submit_submission('www.adc.com','Assignment done', To_do_list, [5,3])
-# # # #
-# # # #
-# # # # #
-# # # # #
-# # # # # print(Adam.grades)
-# # # #
-# #
-# # # print(len(Student.get_all()))
-# for student in Student.get_all():
-#        print(student)
-#        print(student.attendances.attendance_list[0])
-# # #
-# Student.write_changes_to_file('students2.csv')
-#
-# for student in Student.get_all():
-#        print(student)
-#        print(student.attendances.attendance_list[0])
-#
-# # # print(len(Student.get_all()))
-# # for student in Student.get_all():
-# #        print(student)
-# #        print(student.attendances.attendance_list[0])
-# #
-# # # print(To_do_list.ASSIGNMENT_SUBMISSION)
-# # Student.write_changes_to_file('students2.csv')
-# #
-# # Assignment.write_changes_to_file('Assignment.csv')
-# #
-# # Assignment.loading_file('Assignment.csv')
-# #
-# #
-# # print(Assignment.get_all())
-# #
-# # for assignment in Assignment.get_all():
-# #     print(assignment)
-# #
-# #
-# # Assignment.write_changes_to_file('Assignment2.csv')
-#
-# # # # print(To_do_list.ASSIGNMENT_SUBMISSION)
-# # # Student.write_changes_to_file('students2.csv')
-# # # #
-# # # Assignment.write_changes_to_file('Assignment.csv')
-# # # #
-# # # Assignment.loading_file('Assignment.csv')
-# # # #
-# # # #
-# # # print(Assignment.get_all())
-# # #
-# # # for element in Assignment.get_all():
-# # #     print(element)
-# #
-# # #
-# # # for assignment in Assignment.get_all():
-# # #     print(assignment)
-# #
-# #
-# # #Assignment.write_changes_to_file('Assignment2.csv')
+

@@ -17,14 +17,14 @@ class Mentor(Employee):
         Assignment(name_assignment, deadline, date_added,task)
 
     def grade_subbmission(self, student_obj, grade): ## jako arg podajemy obiekt klasy student i ta funkcja zmienia temu obiektowi ocene w ostatnim nieocenionym submission
-        if  not student_obj.submissions.submission_list[-1].grades:
-             student_obj.submissions.submission_list[-1].grades.append(grade)  ##grade to lista z ocenami np [2,3,5]
+        if  not student_obj.submissions[-1].grades:
+            student_obj.submissions[-1].grades.append(grade)  ##grade to lista z ocenami np [2,3,5]
         else:
-            print("pusta lista")
+             print("pusta lista")
             # raise LookupError "Already graded"
 
     def check_attendance(self, student_obj, date, status):
-            student_obj.attendences.check_presence(date, status)
+            student_obj.attendances.checking_presence(date, status)
 
     def to_list(self):
         return [self.name, self.surname, self.age, self.gender, self.pesel, self.login, self._password, self.date_removed, self.status, self.date_when_added]
