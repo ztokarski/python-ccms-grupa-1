@@ -61,7 +61,7 @@ def printing_menu_mentor():
 
     print("1.View student list\n"
           "2.Add student\n"
-          "3.Remove student\n "
+          "3.Remove student\n"
           "4.Check attendace\n"
           "5.Grade assigment\n"
           "6.Exit")
@@ -79,11 +79,24 @@ def mentor_menu(mentor_object):
         printing_menu_mentor()
         user_input = input("Select an option: ")
         if user_input == "1":
-            table = get_from_object_to_list(Student.get_all())
+            table = get_from_object_to_list(mentor_object.viev_student_details())
             head = ["name", "surname", "age", "gender", "pesel", "login", "status", "date_added"]
             print_table(table, head)
         elif user_input == "2":
-            pass
+            name = input("Name :")
+            surname = input("Surname :")
+            age = input("Age :")
+            gender = input("Gender :")
+            password = "12345"
+            pesel = input("PESEL: ")
+            login = name + surname
+            date_remove = ""
+            status = "active"
+            date_when_added = actual_date
+
+            mentor_object.add_student(name, surname, age, gender, pesel, login, password, date_remove, status,
+                                   date_when_added)
+
         elif user_input == "3":
             pass
         elif user_input == "4":
@@ -120,6 +133,7 @@ def menager_menu(menager_obj):
             for object in Mentor.get_all():
                 if user_input2 == object.surname:
                     menager_obj.remove_mentor(object)
+                    object.data_remove = actual_date
         elif user_input == "4":
             sys.exit()
 
