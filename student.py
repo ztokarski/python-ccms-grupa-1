@@ -13,22 +13,25 @@ class Student(User):
 
     ALL_STUDENTS = []  # list containing all instances of Student class
 
-    def __init__(self,name, surname, age, gender, pesel, login, password, date_removed=None, status= 'Active',date_when_added = 'None', submissions= []):
+    def __init__(self,name, surname, age, gender, pesel, login, password, date_removed=None, status= 'Active',date_when_added = 'None'):
         '''Method that initialize instance of Student class.'''
 
         User.__init__(self,name, surname, age, gender, pesel, login, password, date_removed, status, date_when_added)
 
         self.attendances = Attendance()
-        self.submissions = submissions
+
         self.ALL_STUDENTS.append(self)
         self.grades = []
+        self.state = False
+        self.submissions = []
+
 
     def submit_submission(self, link, description, assignment, grades):
         '''Method that creates instance of Submission class and adds this instance to list of all instance of
         Submission class created by the given instance of Student class.'''
 
-        self.submissions = Submission(link,description, assignment,grades)
-        self.submissions.add_submission_to_submissions_list()
+        self.submissions.append(Submission(link, description, assignment, grades))
+
 
     def get_grades(self):
         if self.submissions:
@@ -68,14 +71,14 @@ class Student(User):
 
         submission_data = ''
         if self.submissions:
-            for index in range(len(self.submissions.submissions_list)):
-                if index == len(self.submissions.submissions_list) - 1:
-                    string_submissions += self.submissions.submissions_list[index].link + ',' + self.submissions.submissions_list[index].description
+            for index in range(len(self.submissions)):
+                if index == len(self.submissions) - 1:
+                    string_submissions += self.submissions[index].link + ':' + self.submissions[index].description
 
                 else:
-                    string_submissions += self.submissions.submissions_list[index].link + ',' + self.submissions.submissions_list[index].description + ','
+                    string_submissions += self.submissions[index].link + ':' + self.submissions[index].description + '|'
 
-            for element in self.submissions.submissions_list:
+            for element in self.submissions:
                 for index in range(len(element.grades)):
                     if index == len(element.grades)-1:
                         string_grades += str(element.grades[index])
@@ -83,23 +86,19 @@ class Student(User):
                     else:
                         string_grades += str(element.grades[index]) + ':'
 
-                # if index == len(self.ASSIGNMENT_SUBMISSION[self].grades) - 1:
-                #             string_submission_grades += self.ASSIGNMENT_SUBMISSION[self].grades[index]
-                #
-                #         else:
-                #             string_submission_grades += self.ASSIGNMENT_SUBMISSION[self].grades[index]
 
             string_assignment_data = ''
 
-            for element in range(len(self.submissions.submissions_list)):
+            for element in range(len(self.submissions)):
 
-                if element == len(self.submissions.submissions_list)-1:
-                    string_assignment_data += self.submissions.submissions_list[element].assignment.name_assignment + ',' + self.submissions.submissions_list[element].assignment.deadline + ',' + self.submissions.submissions_list[element].assignment.date_added + ',' + self.submissions.submissions_list[element].assignment.task
+                if element == len(self.submissions)-1:
+                    string_assignment_data += self.submissions[element].assignment.name_assignment + ':' + self.submissions[element].assignment.deadline + ':' + self.submissions[element].assignment.date_added + ':' + self.submissions[element].assignment.task
 
                 else:
-                    string_assignment_data += self.submissions.submissions_list[element].assignment.name_assignment + ',' + self.submissions.submissions_list[element].assignment.deadline + ',' + self.submissions.submissions_list[element].assignment.date_added + ',' + self.submissions.submissions_list[element].assignment.task + ','
+                    string_assignment_data += self.submissions[element].assignment.name_assignment + ':' + self.submissions[element].assignment.deadline + ':' + self.submissions[element].assignment.date_added + ':' + self.submissions[element].assignment.task + '|'
 
             submission_data = string_submissions + ',' + string_grades + ',' + string_assignment_data
+            print(submission_data)
 
         return [self.name, self.surname, str(self.age), self.gender, self.pesel, self.login, self._password, str(self.date_removed), self.status, str(self.date_when_added), str(attendance_dates_status), str(submission_data)]
 
@@ -120,10 +119,32 @@ class Student(User):
                                             str(line_splitted[4]), str(line_splitted[5]), str(line_splitted[6]), str(line_splitted[7]),
                                             str(line_splitted[8]),str(line_splitted[9]))
 
+                try:
+                    grades = line_splitted[12].split(':')  # to check whether there are grades
+
+                except:
+                    grades = []  # inserting default empty list
+
                 try:   # to check whether there is submission data
-                    grades = line_splitted[13].split(':')  #loading submissions grade data
-                    assignment_submitted = Assignment(line_splitted[14],line_splitted[15],  line_splitted[16], line_splitted[17])  #loading data relevant for instance of Assignment class to which submission was made and creation of assignment class
-                    one_from_students.submit_submission(line_splitted[11],line_splitted[12], assignment_submitted, grades)  # creating instance of Submission class
+
+                    assignment_data = line_splitted[13].split('|')
+
+                    separated_assignment_data = []
+
+                    for item in assignment_data:
+                        separated_assignment_data.append(item.split(':'))
+
+                    sole_submission_data = line_splitted[11].split('|')
+                    separated_sole_submission_data = []
+
+                    for item in sole_submission_data:
+                        separated_sole_submission_data.append(item.split(':'))
+
+                    for element in range(len(separated_assignment_data)):
+
+                        assignment_submitted = Assignment(separated_assignment_data[element][0], separated_assignment_data[element][1], separated_assignment_data[element][2], separated_assignment_data[element][3])   #loading data relevant for instance of Assignment class to which submission was made and creation of assignment clas
+
+                        one_from_students.submit_submission(separated_sole_submission_data[element][0], separated_sole_submission_data[element][1], assignment_submitted, grades)  # creating instance of Submission class
 
 
                 except IndexError:
@@ -151,9 +172,9 @@ class Student(User):
         '''Saves data extracted from instances of Student class (by to_list method) into given file.'''
 
         with open(filename, "w") as class_file:
-            for obj in cls.ALL_STUDENTS:
+            for student in cls.ALL_STUDENTS:
 
-                row = ",".join(obj.to_list())
+                row = ",".join(student.to_list())
 
                 class_file.write(row + "\n")
             class_file.close()
@@ -166,61 +187,73 @@ class Student(User):
 
 
 
-# Student.loading_file()
-# # # persons.age, persons.gender, persons.pesel, persons.login, persons.status, persons.date_when_adde
+#Student.loading_file('students2.csv')
+# # # # persons.age, persons.gender, persons.pesel, persons.login, persons.status, persons.date_when_adde
+# # #
+# # for student in Student.get_all():
+# #      print(type(student.name))
+# #      print(type(student.surname))
+# #      print(type(student.age))
+# #      print(type(student.pesel))
+# #      print(type(student.login))
+# #      print(type(student.status))
+# #      print(type(student.date_when_added))
 # #
-# for student in Student.get_all():
-#      print(type(student.name))
-#      print(type(student.surname))
-#      print(type(student.age))
-#      print(type(student.pesel))
-#      print(type(student.login))
-#      print(type(student.status))
-#      print(type(student.date_when_added))
-#
+# # Student.write_changes_to_file('students2.csv')
+# #
+# #
+# # #
+# # Student.loading_file('students2.csv')
+# # #
+# # for student in Student.get_all():
+# #     print(type(student.name))
+# #     print(type(student.surname))
+# #     print(type(student.age))
+# #     print(type(student.pesel))
+# #     print(type(student.login))
+# #     print(type(student.status))
+# #     print(type(student.date_when_added))
+# #
+# # a = None
+# # for student in Student.get_all():
+# #      if student.surname == 'Milecka':
+# #          a = student
+# # #
+# # #
+# # print(a)
+# # #
+# # a.attendances.checking_presence('2017/1/10','1')
+# # a.attendances.update_presence('2017/1/10','2')
+# # for attendance in a.attendances.attendance_list:
+# #      print(a)
+# #      print(attendance)
+# # #
+# #
+# #
+# # #
+# # # #
+# # # #
+# # # #
+# # # #
+# Mike = Student('Mike', 'Beckingham', '22', 'Male','12345678912', 'DaveBeckingham','abc123')
+# # # # #
+# ## Mike.attendances.checking_presence('2088/1/20','1')
+# Inventory = Assignment('Inventory','2017/2/10','2016/10/12', 'create inventory')
+# To_do_list = Assignment('To_do_list','2017/1/20', '2017/1/1','create to do list')
+# Mike.submit_submission('www.asbc.com','Done',To_do_list,[])
+# # #for submission in Mike.submissions:
+# #  #   print(submission)
+# #
+# Mike.submit_submission('www.gd.com', 'hard',Inventory, [])
+# #
+# # # for submission in Mike.submissions:
+# # #     print(submission)
+# # #
+# # for student in Student.get_all():
+# #     print(student.submissions)
 # Student.write_changes_to_file('students2.csv')
 #
 #
-# #
-# Student.loading_file('students2.csv')
-# #
-# for student in Student.get_all():
-#     print(type(student.name))
-#     print(type(student.surname))
-#     print(type(student.age))
-#     print(type(student.pesel))
-#     print(type(student.login))
-#     print(type(student.status))
-#     print(type(student.date_when_added))
-#
-# a = None
-# for student in Student.get_all():
-#      if student.surname == 'Milecka':
-#          a = student
-# #
-# #
-# print(a)
-# #
-# a.attendances.checking_presence('2017/1/10','1')
-# a.attendances.update_presence('2017/1/10','2')
-# for attendance in a.attendances.attendance_list:
-#      print(a)
-#      print(attendance)
-# #
-#
-#
-# #
-# # #
-# # #
-# # #
-# # #
-# Mike = Student('Mike', 'Beckingham', '22', 'Male','12345678912', 'DaveBeckingham','abc123')
-# # #
-# Mike.attendances.checking_presence('2088/1/20','1')
-# Inventory = Assignment('Inventory','2017/2/10','2016/10/12', 'create inventory')
-# To_do_list = Assignment('To_do_list','2017/1/20', '2017/1/1','create to do list')
-# Mike.submit_submission('www.asbc.com','Done',To_do_list,['2','3'])
-# #
 # #
 # # print(Assignment.get_all())
 # #

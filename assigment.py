@@ -13,7 +13,7 @@ class Assignment:
 
     def __str__(self):
 
-        return 'Assignment: {}; Task: {}; Deadline: {}; Added: {}.'.format(self.name_assignment, self.task, self.deadline, self.date_added)
+        return 'Assignment: {}; Task: {}; Deadline: {}; Added by Mentor: {}.'.format(self.name_assignment, self.task, self.deadline, self.date_added)
 
     def to_list(self):
         '''Method that extracts data from Assigment class and converts it into string.'''
@@ -26,7 +26,7 @@ class Assignment:
         return [string_assignment_data]
 
     @classmethod
-    def write_changes_to_file(cls, filename):
+    def write_changes_to_file(cls, filename='Assignment.csv'):
         '''Saves data extracted from instances of Student class (by to_list method) into given file.'''
 
         with open(filename, "w") as class_file:
@@ -38,7 +38,7 @@ class Assignment:
             class_file.close()
 
     @classmethod
-    def loading_file(cls, filename):
+    def loading_file(cls, filename='Assignment.csv'):
         '''Method that loads data from file and creats objects of assigment class'''
 
         with open(filename, 'r') as class_file:
@@ -47,8 +47,6 @@ class Assignment:
             for line in class_file:
 
                 line_splitted = line.strip('\n').split(',')
-                print(line_splitted)
-
                 Assignment(line_splitted[0], line_splitted[1], line_splitted[2], line_splitted[3])
 
             class_file.close()
@@ -56,8 +54,6 @@ class Assignment:
     @classmethod
     def get_all(cls):
         return cls.ASSIGNMENTS
-
-
 
 
 
