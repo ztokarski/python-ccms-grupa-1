@@ -244,4 +244,3 @@ class Student(User):
 #
 #
 # #Assignment.write_changes_to_file('Assignment2.csv')
->>>>>>> 0ea92449fb41b7d9bcbe16eba3dff8f1a6f2ff39
