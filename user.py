@@ -1,5 +1,7 @@
 import time
 
+
+
 class User:
     '''Class containing basic data pertaining to all users of the system.'''
 

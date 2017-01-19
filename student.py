@@ -105,7 +105,7 @@ class Student(User):
 
 
     @classmethod
-    def loading_file(cls,filename):
+    def loading_file(cls,filename = 'students.csv'):
         '''Method that loads data from file and creats objects of student class and associated with this class objects of
         attendance and submission classes.'''
 
@@ -115,7 +115,7 @@ class Student(User):
 
                 line_splitted = line.strip('\n').split(',')
 
-                one_from_students = Student(line_splitted[0], line_splitted[1], int(line_splitted[2]),
+                one_from_students = Student(line_splitted[0], line_splitted[1], line_splitted[2],
                                             line_splitted[3],
                                             line_splitted[4], line_splitted[5], line_splitted[6], line_splitted[7],
                                             line_splitted[8])
@@ -139,7 +139,7 @@ class Student(User):
 
                     for element in range(len(separated_dates_status)):
 
-                        one_from_students.attendances.checking_presence(separated_dates_status[element][0], int(separated_dates_status[element][1]))  # creating instances of Attendance class
+                        one_from_students.attendances.checking_presence(separated_dates_status[element][0], separated_dates_status[element][1])  # creating instances of Attendance class
 
                 except IndexError:
                     pass   # if there are no attendance data then instance of student object is created without instances of attendance class
@@ -147,7 +147,7 @@ class Student(User):
             class_file.close()
 
     @classmethod
-    def write_changes_to_file(cls, filename):
+    def write_changes_to_file(cls, filename='students.csv'):
         '''Saves data extracted from instances of Student class (by to_list method) into given file.'''
 
         with open(filename, "w") as class_file:
@@ -166,7 +166,49 @@ class Student(User):
 
 
 
-# Student.loading_file('students.csv')
+# Student.loading_file()
+# # persons.age, persons.gender, persons.pesel, persons.login, persons.status, persons.date_when_adde
+#
+# for student in Student.get_all():
+#     print(type(student.name))
+#     print(type(student.surname))
+#     print(type(student.age))
+#     print(type(student.pesel))
+#     print(type(student.login))
+#     print(type(student.status))
+#     print(type(student.date_when_added))
+#
+# Student.write_changes_to_file('students2.csv')
+#
+#
+#
+# Student.loading_file('students2.csv')
+#
+# for student in Student.get_all():
+#     print(type(student.name))
+#     print(type(student.surname))
+#     print(type(student.age))
+#     print(type(student.pesel))
+#     print(type(student.login))
+#     print(type(student.status))
+#     print(type(student.date_when_added))
+
+# a = None
+# for student in Student.get_all():
+#     if student.surname == 'Milecka':
+#         a = student
+#
+#
+# print(a)
+#
+# a.attendances.checking_presence('2017/1/10','1')
+# a.attendances.update_presence('2017/1/10','2')
+# for attendance in a.attendances.attendance_list:
+#     print(a)
+#     print(attendance)
+#
+# Student.write_changes_to_file('students2.csv')
+
 #
 # #
 # #
