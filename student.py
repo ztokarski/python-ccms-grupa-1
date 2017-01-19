@@ -13,7 +13,7 @@ class Student(User):
 
     ALL_STUDENTS = []  # list containing all instances of Student class
 
-    def __init__(self,name, surname, age, gender, pesel, login, password, date_removed=None, status= 'Active', submissions= [],date_when_added = ''):
+    def __init__(self,name, surname, age, gender, pesel, login, password, date_removed=None, status= 'Active',date_when_added = 'None', submissions= []):
         '''Method that initialize instance of Student class.'''
 
         User.__init__(self,name, surname, age, gender, pesel, login, password, date_removed, status, date_when_added)
@@ -115,10 +115,10 @@ class Student(User):
 
                 line_splitted = line.strip('\n').split(',')
 
-                one_from_students = Student(line_splitted[0], line_splitted[1], line_splitted[2],
-                                            line_splitted[3],
-                                            line_splitted[4], line_splitted[5], line_splitted[6], line_splitted[7],
-                                            line_splitted[8])
+                one_from_students = Student(str(line_splitted[0]), str(line_splitted[1]), str(line_splitted[2]),
+                                            str(line_splitted[3]),
+                                            str(line_splitted[4]), str(line_splitted[5]), str(line_splitted[6]), str(line_splitted[7]),
+                                            str(line_splitted[8]),str(line_splitted[9]))
 
                 try:   # to check whether there is submission data
                     grades = line_splitted[13].split(':')  #loading submissions grade data
@@ -167,23 +167,23 @@ class Student(User):
 
 
 # Student.loading_file()
-# # persons.age, persons.gender, persons.pesel, persons.login, persons.status, persons.date_when_adde
-#
+# # # persons.age, persons.gender, persons.pesel, persons.login, persons.status, persons.date_when_adde
+# #
 # for student in Student.get_all():
-#     print(type(student.name))
-#     print(type(student.surname))
-#     print(type(student.age))
-#     print(type(student.pesel))
-#     print(type(student.login))
-#     print(type(student.status))
-#     print(type(student.date_when_added))
+#      print(type(student.name))
+#      print(type(student.surname))
+#      print(type(student.age))
+#      print(type(student.pesel))
+#      print(type(student.login))
+#      print(type(student.status))
+#      print(type(student.date_when_added))
 #
 # Student.write_changes_to_file('students2.csv')
 #
 #
-#
+# #
 # Student.loading_file('students2.csv')
-#
+# #
 # for student in Student.get_all():
 #     print(type(student.name))
 #     print(type(student.surname))
@@ -192,97 +192,102 @@ class Student(User):
 #     print(type(student.login))
 #     print(type(student.status))
 #     print(type(student.date_when_added))
-
+#
 # a = None
 # for student in Student.get_all():
-#     if student.surname == 'Milecka':
-#         a = student
-#
-#
+#      if student.surname == 'Milecka':
+#          a = student
+# #
+# #
 # print(a)
-#
+# #
 # a.attendances.checking_presence('2017/1/10','1')
 # a.attendances.update_presence('2017/1/10','2')
 # for attendance in a.attendances.attendance_list:
-#     print(a)
-#     print(attendance)
+#      print(a)
+#      print(attendance)
+# #
 #
-# Student.write_changes_to_file('students2.csv')
-
 #
 # #
-# #
-# #
-# #
-# Mike = Student('Mike', 'Beckingham', 22, 'Male','12345678912', 'DaveBeckingham','abc123')
-# #
-# # Mike.attendances.checking_presence('2088/1/20',1)
+# # #
+# # #
+# # #
+# # #
+# Mike = Student('Mike', 'Beckingham', '22', 'Male','12345678912', 'DaveBeckingham','abc123')
+# # #
+# Mike.attendances.checking_presence('2088/1/20','1')
 # Inventory = Assignment('Inventory','2017/2/10','2016/10/12', 'create inventory')
 # To_do_list = Assignment('To_do_list','2017/1/20', '2017/1/1','create to do list')
-# Mike.submit_submission('www.asbc.com','Done',To_do_list,[2,3])
-#
-#
-# print(Assignment.get_all())
-#
-# #Adam = Student('Adam','Mak',22, 'Male', '12345678901','AdamM','Capac', None, 'Active','', '7/1/2016')
+# Mike.submit_submission('www.asbc.com','Done',To_do_list,['2','3'])
 # #
-#
-# # for student in Student.get_all():
-# #     student.attendances.checking_presence('2017/1/18',2)
-#
+# #
+# # print(Assignment.get_all())
+# #
+# # #Adam = Student('Adam','Mak',22, 'Male', '12345678901','AdamM','Capac', None, 'Active','', '7/1/2016')
 # # #
-# # #
-# # Adam.submit_submission('www.adc.com','Assignment done', To_do_list, [5,3])
-# # #
-# # #
+# #
+# for student in Student.get_all():
+#      student.attendances.checking_presence('2017/1/18','2')
+# #
 # # # #
 # # # #
-# # # # print(Adam.grades)
-# # #
-#
-# # print(len(Student.get_all()))
-# # for student in Student.get_all():
-# #        print(student)
-# #        print(student.attendances.attendance_list[0])
+# # # Adam.submit_submission('www.adc.com','Assignment done', To_do_list, [5,3])
+# # # #
+# # # #
+# # # # #
+# # # # #
+# # # # # print(Adam.grades)
+# # # #
 # #
-
-# # print(len(Student.get_all()))
+# # # print(len(Student.get_all()))
+# for student in Student.get_all():
+#        print(student)
+#        print(student.attendances.attendance_list[0])
+# # #
+# Student.write_changes_to_file('students2.csv')
+#
 # for student in Student.get_all():
 #        print(student)
 #        print(student.attendances.attendance_list[0])
 #
-# # print(To_do_list.ASSIGNMENT_SUBMISSION)
-# Student.write_changes_to_file('students2.csv')
-#
-# Assignment.write_changes_to_file('Assignment.csv')
-#
-# Assignment.loading_file('Assignment.csv')
-#
-#
-# print(Assignment.get_all())
-#
-# for assignment in Assignment.get_all():
-#     print(assignment)
-#
-#
-# Assignment.write_changes_to_file('Assignment2.csv')
-
+# # # print(len(Student.get_all()))
+# # for student in Student.get_all():
+# #        print(student)
+# #        print(student.attendances.attendance_list[0])
+# #
 # # # print(To_do_list.ASSIGNMENT_SUBMISSION)
 # # Student.write_changes_to_file('students2.csv')
-# # #
-# # Assignment.write_changes_to_file('Assignment.csv')
-# # #
-# # Assignment.loading_file('Assignment.csv')
-# # #
-# # #
-# # print(Assignment.get_all())
 # #
-# # for element in Assignment.get_all():
-# #     print(element)
-#
+# # Assignment.write_changes_to_file('Assignment.csv')
+# #
+# # Assignment.loading_file('Assignment.csv')
+# #
+# #
+# # print(Assignment.get_all())
 # #
 # # for assignment in Assignment.get_all():
 # #     print(assignment)
+# #
+# #
+# # Assignment.write_changes_to_file('Assignment2.csv')
 #
-#
-# #Assignment.write_changes_to_file('Assignment2.csv')
+# # # # print(To_do_list.ASSIGNMENT_SUBMISSION)
+# # # Student.write_changes_to_file('students2.csv')
+# # # #
+# # # Assignment.write_changes_to_file('Assignment.csv')
+# # # #
+# # # Assignment.loading_file('Assignment.csv')
+# # # #
+# # # #
+# # # print(Assignment.get_all())
+# # #
+# # # for element in Assignment.get_all():
+# # #     print(element)
+# #
+# # #
+# # # for assignment in Assignment.get_all():
+# # #     print(assignment)
+# #
+# #
+# # #Assignment.write_changes_to_file('Assignment2.csv')
