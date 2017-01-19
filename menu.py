@@ -7,6 +7,12 @@ from mentor import *
 from menager import *
 from UI import *
 from employee import *
+import time
+
+
+date = time.localtime()
+actual_date = "{}/{}/{}".format(date[0],date[1],date[2])
+
 
 def Password_Validator(type): #returns object
 
@@ -26,7 +32,7 @@ def Password_Validator(type): #returns object
                     return element
     if type == "Menager":
         for element in Menager.get_all():
-            if element.login == login:
+            if element.login == login and element.status == "active":
                 if element._password == password:
                     return element
 
@@ -54,8 +60,8 @@ def printing_start_menu():
 def printing_menu_mentor():
 
     print("1.View student list\n"
-          "2.Add studen\nt"
-          "3.Remove student\n "
+          "2.Add student\n"
+          "3.Remove student\n"
           "4.Check attendace\n"
           "5.Grade assigment\n"
           "6.Exit")
@@ -65,9 +71,7 @@ def printing_menu_menager():
     print("1.List Mentors\n"
           "2.Add Mentor\n"
           "3.Remove student \n"
-          "4.Check attendace\n"
-          "5.Grade assigment\n"
-          "6.Exit")
+          "4.Exit\n")
 
 def mentor_menu(mentor_object):
 
@@ -79,7 +83,20 @@ def mentor_menu(mentor_object):
             head = ["name", "surname", "age", "gender", "pesel", "login", "status", "date_added"]
             print_table(table, head)
         elif user_input == "2":
-            pass
+            name = input("Name :")
+            surname = input("Surname :")
+            age = input("Age :")
+            gender = input("Gender :")
+            password = "12345"
+            pesel = input("PESEL: ")
+            login = name + surname
+            date_remove = ""
+            status = "active"
+            date_when_added = actual_date
+
+            mentor_object.add_student(name, surname, age, gender, pesel, login, password, date_remove, status,
+                                   date_when_added)
+
         elif user_input == "3":
             pass
         elif user_input == "4":
@@ -98,15 +115,26 @@ def menager_menu(menager_obj):
             head = ["name", "surname", "age", "gender", "pesel", "login", "status", "date_added"]
             print_table(table, head)
         elif user_input == "2":
+            name = input("Name :")
+            surname = input("Surname :")
+            age = input("Age :")
+            gender = input("Gender :")
+            password = "12345"
+            pesel = input("PESEL: ")
+            login = name+surname
+            date_remove = ""
+            status = "active"
+            date_when_added = actual_date
 
+            menager_obj.add_mentor(name, surname, age, gender, pesel, login, password, date_remove, status, date_when_added)
 
         elif user_input == "3":
-            pass
+            user_input2 = input("Give me Surname: ")
+            for object in Mentor.get_all():
+                if user_input2 == object.surname:
+                    menager_obj.remove_mentor(object)
+                    object.data_remove = actual_date
         elif user_input == "4":
-            pass
-        elif user_input == "5":
-            pass
-        elif user_input == "6":
             sys.exit()
 
 
@@ -123,7 +151,7 @@ def main():
             if object:
                 mentor_menu(object)
             else:
-                print("something gona wrong")
+                print("Wrong password or disabled account")
 
         elif user_input == "2":
             object = Password_Validator("Menager")

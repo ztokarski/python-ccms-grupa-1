@@ -1,4 +1,4 @@
-Robert,Sulik,30,Male,890513644,RobertSulik,12345,None,active,2017/1/17
+Robert,Sulik,30,Male,890513644,,12345,None,active,2017/1/17
 Zbigniew,Sulik,31,Male,890513645,ZbigniewSulik,12345,None,active,2017/1/17
 Robert,Sulikowski,32,Male,890513646,RobertSulikowski,12345,None,active,2017/1/17
 Robert,Surma,27,Male,890513647,RobertSurma,12345,None,active,2017/1/17
@@ -7,5 +7,5 @@ Wiktor,Suwald,29,Male,890513649,WiktorSuwald,12345,None,active,2017/1/17
 Michał,Szerka,30,Male,890513650,MichałSzerka,12345,None,active,2017/1/17
 Tadeusz,Tomora,31,Male,890513651,TadeuszTomora,12345,None,active,2017/1/17
 Zbigniew,Trewirek,32,Male,890513652,ZbigniewTrewirek,12345,None,active,2017/1/17
-Zbigniew,Twardy,33,Male,890513653,ZbigniewTwardy,12345,None,active,2017/1/17
+Zbigniew,Twardy,33,Male,890513653,ZbigniewTwardy,12345,None,disabled,2017/1/17
 Andrzej,duda,24,M,12345,AD,policja,None,active,2018
