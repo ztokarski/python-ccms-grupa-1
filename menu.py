@@ -65,7 +65,21 @@ def submitting_assignment(student_obj):
             return
 
 
+def view_attendance():
 
+    selected_date = input('Please indicate day (yyyy/m/dd): ')
+
+    attendance_data = []
+    for student in Student.get_all():
+        for day in student.attendances.attendance_list:
+            if day.date == selected_date:
+                string = student.name + ' ' + student.surname +'. ' + str(day)
+                attendance_data.append(string)
+
+    to_print_attendance_data = set(attendance_data)
+
+    for student in to_print_attendance_data:
+        print(student)
 
 def processing_submission(student_obj, assignment_to_be_submitted):
     '''Processing submission request - creation of new instance from submission class
@@ -97,6 +111,7 @@ def overwriting_submission(student_obj,assignment_to_be_submitted):
 
 def show_grades(student_obj):
     print('Your grades: ')
+    student_obj.get_grades()
     if student_obj.grades:
         for grade in student_obj.grades:
             print(grade)
@@ -158,7 +173,8 @@ def printing_menu_mentor():
           "4.Check attendace\n"
           "5.Add assigment\n"
           "6.Grade assigment\n"
-          "7.Exit")
+          "7. View students attendance.\n"
+          "8.Exit")
 
 def printing_menu_menager():
 
@@ -248,20 +264,21 @@ def mentor_menu(mentor_object,actual_date):
                  if student_obj.surname == student_surname:
 
                      try:
-                        student_obj.submissions[-1].grades
-                        print(student_obj.submissions[-1])
-                        grade_submission = input('Give grades for this submission separated by comma (1-5): ')
-                        grades = grade_submission.split(',')
-                        student_obj.submissions[-1].grades = grades
-                        mentor_object.grade_subbmission(student_obj, grade_submission)
-                        print(student_obj.submissions[-1])
+                        if student_obj.submissions[-1].grades[0].isdigit() == False:
+                            print(student_obj.submissions[-1])
+                            grade_submission = input('Give grades for this submission separated by comma (1-5): ')
+                            grades = grade_submission.split(',')
+                            student_obj.submissions[-1].grades = grades
+                            print(student_obj.submissions[-1])
 
                      except IndexError:
                          pass
 
 
-
         elif user_input == "7":
+            view_attendance()
+
+        elif user_input == "8":
 
             closing_program()
 

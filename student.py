@@ -35,7 +35,7 @@ class Student(User):
 
     def get_grades(self):
         if self.submissions:
-            for submission in self.submissions.submissions_list:
+            for submission in self.submissions:
                 self.grades.extend(submission.grades)
 
     def give_instance_values(self):
