@@ -176,7 +176,7 @@ class Submission():
 
 
 
-Student.loading_file('students2.csv')
+# Student.loading_file('students2.csv')
 
 
 

@@ -1,6 +1,10 @@
 from user import User
 from student import Student
 
+
+""" Jak narazie to jedna z najbardziej kompletnych klas"""
+"""w miare wsystko jest i co najlepsze nawet działa"""
+
 class Employee(User):
     EMPLOYEE_LIST = []
 
@@ -9,9 +13,6 @@ class Employee(User):
 
     def viev_student_details(self):
         return Student.get_all()
-
-    # def create_employee():
-    #     pass
 
     def to_list(self):
         return [self.name, self.surname, self.age, self.gender, self.pesel, self.login, self._password, self.date_removed, self.status, self.date_when_added]
@@ -40,12 +41,8 @@ class Employee(User):
          return cls.EMPLOYEE_LIST
 
 
-#
+
 # Employee.loading_file()
-#
-# Employee.write_changes_to_file()
-#
-# for item in Employee.get_all():
-#     print("cok")
-#     print(item.__dict__)
+# Student.loading_file()
+# Employee.get_all()[0].viev_student
 #
