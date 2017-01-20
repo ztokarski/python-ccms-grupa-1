@@ -161,11 +161,9 @@ def printing_menu_menager():
 
 def printing_menu_student():
 
-    print('''
-        1. Submit assignment.
-        2. View my grades.
-        3. Exit.
-        ''')
+    print("1. Submit assignment\n"
+          "2.View my Grades\n"
+          "3.Exit\n")
 
 def printng_menu_employee():
     print("1.View students list\n"
