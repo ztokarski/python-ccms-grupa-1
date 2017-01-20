@@ -30,7 +30,7 @@ class Mentor(Employee):
         return [self.name, self.surname, self.age, self.gender, self.pesel, self.login, self._password, self.date_removed, self.status, self.date_when_added]
 
     @classmethod
-    def loading_file(cls, filename="mentors.csv"):
+    def loading_file(cls, filename="data/mentors.csv"):
         cls.MENTOR_LIST = []
         with open(filename, 'r') as class_file:
             count = 1
@@ -41,7 +41,7 @@ class Mentor(Employee):
 
 
     @classmethod
-    def write_changes_to_file(cls,filename = "mentors.csv"):
+    def write_changes_to_file(cls,filename = "data/mentors.csv"):
         with open(filename, "w") as class_file:
             for obj in cls.MENTOR_LIST:
                 row = ",".join(obj.to_list())

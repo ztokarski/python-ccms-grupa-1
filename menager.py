@@ -25,7 +25,7 @@ class Menager(Employee):
         return [self.name, self.surname, self.age, self.gender, self.pesel, self.login, self._password, self.date_removed, self.status, self.date_when_added]
 
     @classmethod
-    def loading_file(cls,filename = "menagers.csv"):
+    def loading_file(cls,filename = "data/menagers.csv"):
         cls.MENAGER_LIST = []
         with open(filename, 'r') as class_file:
             count = 1
@@ -34,7 +34,7 @@ class Menager(Employee):
                 cls.MENAGER_LIST.append(Menager(line[0],line[1],line[2], line[3],line[4],line[5],line[6],line[7],line[8], line[9]))
 
     @classmethod
-    def write_changes_to_file(cls,filename = "menagers.csv"):
+    def write_changes_to_file(cls,filename = "data/menagers.csv"):
         with open(filename, "w") as class_file:
             for obj in cls.MENAGER_LIST:
                 row = ",".join(obj.to_list())

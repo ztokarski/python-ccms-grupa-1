@@ -18,7 +18,7 @@ class Employee(User):
         return [self.name, self.surname, self.age, self.gender, self.pesel, self.login, self._password, self.date_removed, self.status, self.date_when_added]
 
     @classmethod
-    def loading_file(cls,filename = "employees.csv"):
+    def loading_file(cls,filename = "data/employees.csv"):
         cls.EMPLOYEE_LIST = []
         with open(filename, 'r') as class_file:
             count = 1
@@ -29,7 +29,7 @@ class Employee(User):
             class_file.close()
 
     @classmethod
-    def write_changes_to_file(cls,filename = "employees.csv"):
+    def write_changes_to_file(cls,filename = "data/employees.csv"):
         with open(filename, "w") as class_file:
             for obj in cls.EMPLOYEE_LIST:
                 row = ",".join(obj.to_list())

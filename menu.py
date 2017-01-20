@@ -13,6 +13,13 @@ import time
 # date = time.localtime()
 # actual_date = "{}/{}/{}".format(date[0],date[1],date[2])
 
+def closing_program():
+    Student.write_changes_to_file()
+    Menager.write_changes_to_file()
+    Employee.write_changes_to_file()
+    Mentor.write_changes_to_file()
+    sys.exit()
+
 
 def submitting_assignment(student_obj):
     '''Viewing submitted assignments and assignments that await submission, selection options.'''
@@ -149,8 +156,9 @@ def printing_menu_mentor():
           "2.Add student\n"
           "3.Remove student\n"
           "4.Check attendace\n"
-          "5.Grade assigment\n"
-          "6.Exit")
+          "5.Add assigment\n"
+          "6.Grade assigment\n"
+          "7.Exit")
 
 def printing_menu_menager():
 
@@ -205,45 +213,57 @@ def mentor_menu(mentor_object,actual_date):
         elif user_input == "4":
 
             """poprawić aby wyświetlało po kolei nazwiska z listy i dalo sie to ogarnac """
-            user_input2 = input("Give me Surname: ")
-            attendance_status = input("1. Absent\n"
-                                     "2. Late\n"
-                                     "3. Present")
+            # user_input2 = input("Give me Surname: ")
+            # attendance_status = input("1. Absent\n"
+            #                          "2. Late\n"
+            #                          "3. Present")
 
             for object in Student.get_all():
-                if user_input2 == object.surname:
+                    print(object.name, object.surname)
+                    attendance_status = input("1. Absent\n"
+                                              "2. Late\n"
+                                              "3. Present")
                     mentor_object.check_attendance(object, actual_date, attendance_status)
 
                     print(object.attendances.attendance_list[-1])  # Michal: showing change of attendance status at given day
 
         elif user_input == "5":
+            name_assignment = input("Please give a name of assignment")
+            deadline = input("Please give a deadline date")
+            task = input("Please give a task:")
+            mentor_object.make_assigment(name_assignment, deadline, actual_date, task)
+            print("Assignment added")
+            Assignment.write_changes_to_file()
+
+        elif user_input == "6":
 
             """o to to zrobie jutro rano"""
-            # student_surname = input('Give student surname: ')  #Michal: sprawdzalem czy kod dziala i jaki jest dostep -
+            student_surname = input('Give student surname: ')  #Michal: sprawdzalem czy kod dziala i jaki jest dostep -
             #                                                    dziala dostep po wyrzuceniu warunku z funkcji w mentorze,
             #                                                    dopisuje jednak ocene do listy zawierajacej pustego stringa
                                                                 # z uwagi na malo czasu chyba lepiej juz zrobic student_obj.submissions[-1].grades = [grade]
                                                                 # albo przy zebraniu kilku ocen z inputa student_obj.submissions[-1].grades = [grade1,grade2,grade3]
-            #
-            # for student_obj in Student.get_all():
-            #      if student_obj.surname == student_surname:
-            #
-            #          try:
-            #             student_obj.submissions[-1].grades
-            #             print(student_obj.submissions[-1])
-            #             grade_submission = input('Give grades for this submission separated by comma (1-5): ')
-            #             grades = grade_submission.split(',')
-            #             student_obj.submissions[-1].grades = grades
-            #             mentor_object.grade_subbmission(student_obj, grade_submission)
-            #             print(student_obj.submissions[-1])
-            #
-            #          except IndexError:
-            #              pass
+
+            for student_obj in Student.get_all():
+                 if student_obj.surname == student_surname:
+
+                     try:
+                        student_obj.submissions[-1].grades
+                        print(student_obj.submissions[-1])
+                        grade_submission = input('Give grades for this submission separated by comma (1-5): ')
+                        grades = grade_submission.split(',')
+                        student_obj.submissions[-1].grades = grades
+                        mentor_object.grade_subbmission(student_obj, grade_submission)
+                        print(student_obj.submissions[-1])
+
+                     except IndexError:
+                         pass
 
 
 
-        elif user_input == "6":
-            sys.exit()
+        elif user_input == "7":
+
+            closing_program()
 
 def menager_menu(menager_obj,actual_date):
     while True:
@@ -274,7 +294,7 @@ def menager_menu(menager_obj,actual_date):
                     menager_obj.remove_mentor(object)
                     object.data_remove = actual_date
         elif user_input == "4":
-            sys.exit()
+            closing_program()
 
 
 def student_menu(student_obj,actual_date):
@@ -289,11 +309,10 @@ def student_menu(student_obj,actual_date):
 
         elif user_input == '3':
             Assignment.write_changes_to_file()
-            Student.write_changes_to_file('students.csv')
-            sys.exit()
+            closing_program()
 
 
-def employee_menu(employee_obj,actual_date):
+def employee_menu(employee_obj):
     while True:
         printng_menu_employee()
         user_input = input("Select an option: ")
@@ -307,7 +326,7 @@ def employee_menu(employee_obj,actual_date):
 
 
 def main():
-    Student.loading_file("students.csv")  #data for instances of Student class MUST be loaded BEFORE data for instances of Assignment class
+    Student.loading_file("data/students2.csv")  #data for instances of Student class MUST be loaded BEFORE data for instances of Assignment class
 
     Assignment.loading_file()
     date = time.localtime()
@@ -342,12 +361,12 @@ def main():
         elif user_input == "4":
             object = Password_Validator("Employee")
             if object:
-                employee_menu(object,actual_date)
+                employee_menu(object)
             else:
                 print("Wrong password or disabled account\n")
 
         elif user_input == "5":
-            sys.exit()
+            closing_program()
 
         else:
             print("no such an option")

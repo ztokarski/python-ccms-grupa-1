@@ -103,7 +103,7 @@ class Student(User):
 
 
     @classmethod
-    def loading_file(cls,filename = 'students.csv'):
+    def loading_file(cls,filename = 'data/students.csv'):
         '''Method that loads data from file and creats objects of student class and associated with this class objects of
         attendance and submission classes.'''
 
@@ -167,7 +167,7 @@ class Student(User):
             class_file.close()
 
     @classmethod
-    def write_changes_to_file(cls, filename='students.csv'):
+    def write_changes_to_file(cls, filename='data/students.csv'):
         '''Saves data extracted from instances of Student class (by to_list method) into given file.'''
 
         with open(filename, "w") as class_file:

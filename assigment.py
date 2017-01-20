@@ -26,7 +26,7 @@ class Assignment:
         return [string_assignment_data]
 
     @classmethod
-    def write_changes_to_file(cls, filename='Assignment.csv'):
+    def write_changes_to_file(cls, filename='data/Assignment.csv'):
         '''Saves data extracted from instances of Student class (by to_list method) into given file.'''
 
         with open(filename, "w") as class_file:
@@ -38,7 +38,7 @@ class Assignment:
             class_file.close()
 
     @classmethod
-    def loading_file(cls, filename='Assignment.csv'):
+    def loading_file(cls, filename='data/Assignment.csv'):
         '''Method that loads data from file and creats objects of assigment class'''
 
         with open(filename, 'r') as class_file:
