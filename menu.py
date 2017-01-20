@@ -113,7 +113,7 @@ def Password_Validator(type): #returns object
     if type == "Mentor":
         Mentor.loading_file()
         for element in Mentor.get_all():
-            if element.login == login:
+            if element.login == login and element.status == "active":
                 if element._password == password:
                     return element
     if type == "Menager":
@@ -124,13 +124,13 @@ def Password_Validator(type): #returns object
 
     if type == "Student":
         for element in Student.get_all():
-            if element.login == login:
+            if element.login == login and element.status == "active":
                 if element._password == password:
                     return element
 
     if type == "Employee":
         for element in Employee.get_all():
-            if element.login == login:
+            if element.login == login and element.status == "active":
                 if element._password == password:
                     return element
 
