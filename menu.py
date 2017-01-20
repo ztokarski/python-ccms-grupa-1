@@ -297,7 +297,7 @@ def menager_menu(menager_obj,actual_date):
             closing_program()
 
 
-def student_menu(student_obj,actual_date):
+def student_menu(student_obj):
     while True:
         printing_menu_student()
         user_input = input("Select an option: ")
@@ -326,7 +326,7 @@ def employee_menu(employee_obj):
 
 
 def main():
-    Student.loading_file("data/students2.csv")  #data for instances of Student class MUST be loaded BEFORE data for instances of Assignment class
+    Student.loading_file("data/students.csv")  #data for instances of Student class MUST be loaded BEFORE data for instances of Assignment class
 
     Assignment.loading_file()
     date = time.localtime()
@@ -354,7 +354,7 @@ def main():
         elif user_input == "3":
             object = Password_Validator("Student")
             if object:
-                student_menu(object,actual_date)
+                student_menu(object)
             else:
                 print("Wrong password or disabled account\n")
 
