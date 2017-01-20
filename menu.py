@@ -129,7 +129,7 @@ def Password_Validator(type): #returns object
                     return element
 
     if type == "Employee":
-        for element in Mentor.get_all():
+        for element in Employee.get_all():
             if element.login == login:
                 if element._password == password:
                     return element
@@ -145,7 +145,7 @@ def printing_start_menu():
 
 def printing_menu_mentor():
 
-    print("1.View student list\n"
+    print("1.View students list\n"
           "2.Add student\n"
           "3.Remove student\n"
           "4.Check attendace\n"
@@ -166,6 +166,10 @@ def printing_menu_student():
         2. View my grades.
         3. Exit.
         ''')
+
+def printng_menu_employee():
+    print("1.View students list\n"
+          "2.Exit\n")
 
 def mentor_menu(mentor_object,actual_date):
 
@@ -290,6 +294,20 @@ def student_menu(student_obj,actual_date):
             Student.write_changes_to_file('students.csv')
             sys.exit()
 
+
+def employee_menu(employee_obj,actual_date):
+    while True:
+        printng_menu_employee()
+        user_input = input("Select an option: ")
+        if user_input == "1":
+            table = get_from_object_to_list(employee_obj.viev_student_details())
+            head = ["name", "surname", "age", "gender", "pesel", "login", "status", "date_added"]
+            print_table(table, head)
+
+        elif user_input == "2":
+            sys.exit()
+
+
 def main():
     Student.loading_file("students.csv")  #data for instances of Student class MUST be loaded BEFORE data for instances of Assignment class
 
@@ -307,26 +325,32 @@ def main():
             if object:
                 mentor_menu(object,actual_date)
             else:
-                print("Wrong password or disabled account")
+                print("Wrong password or disabled account\n")
 
         elif user_input == "2":
             object = Password_Validator("Menager")
             if object:
                 menager_menu(object,actual_date)
             else:
-                print("Wrong password or disabled account")
+                print("Wrong password or disabled account\n")
 
         elif user_input == "3":
             object = Password_Validator("Student")
             if object:
                 student_menu(object,actual_date)
             else:
-                print("Wrong password or disabled account")
+                print("Wrong password or disabled account\n")
+
         elif user_input == "4":
-            if Password_Validator("Employee"):
-                pass
+            object = Password_Validator("Employee")
+            if object:
+                employee_menu(object,actual_date)
+            else:
+                print("Wrong password or disabled account\n")
+
         elif user_input == "5":
             sys.exit()
+
         else:
             print("no such an option")
 
